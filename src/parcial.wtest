@@ -1,0 +1,64 @@
+import universidades.*
+import profesionales.*
+import empresar.*
+
+test "testX" {
+
+	// Universidades
+	var sanMartin = new Universidad()
+	var rosario = new Universidad()
+	var corrientes = new Universidad()
+	var hurlingham = new Universidad()
+	
+	
+	
+	sanMartin.setHonorarios(3500) 
+	sanMartin.setProvincias("Buenos Aires")
+	rosario.setHonorarios(2800)
+	rosario.setProvincias("Sante Fe")
+	corrientes.setHonorarios(4200)
+	corrientes.setProvincias("Corrientes")
+	hurlingham.setHonorarios(8800)
+	hurlingham.setProvincias("Buenos Aires")
+	
+	
+	// Profesionales
+	var juana = new ProfesionalVinculado()
+	juana.universidad(rosario)
+	
+	var melina = new ProfesionalAsociado()
+	melina.universidad(corrientes)
+	
+	var rocio = new ProfesionalLibre()
+	rocio.universidad(hurlingham)
+	rocio.setHonorarios(5000)
+	rocio.setProvincias("Santa Fe")
+	rocio.setProvincias("Cordoba")
+	rocio.setProvincias("Buenos Aires")
+	
+	var luciana = new ProfesionalLibre()
+	luciana.universidad(rosario)
+	luciana.setHonorarios(3200)
+	luciana.setProvincias("Sante Fe")
+	luciana.setProvincias("Entre Rios")
+	
+	// Empresa
+	var empresa = new Empresas()
+	
+	empresa.agregarProfesionales(juana)
+	empresa.agregarProfesionales(melina)
+	empresa.agregarProfesionales(rocio)
+	empresa.agregarProfesionales(luciana)
+	empresa.setHonorarios(3500)
+	assert.equals([rocio],empresa.profesionalesCaros())
+	assert.equals(juana,empresa.profesionalMasBarato())
+	empresa.provinciaCubierta("Santa Fe")
+	assert.that(true)
+	empresa.provinciaCubierta("Cordoba")
+	assert.that(true)
+	empresa.provinciaCubierta("Misiones")
+	assert.notThat(false)
+	assert.equals(1,empresa.cantidadPorProvincia(hurlingham))
+	assert.equals(2,empresa.cantidadPorProvincia(rosario))
+	assert.equals(0,empresa.cantidadPorProvincia(sanMartin))
+}
