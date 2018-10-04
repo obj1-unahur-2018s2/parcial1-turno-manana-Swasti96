@@ -26,6 +26,8 @@ class Empresas {
 		return profesionales.count({profe => profe.universidad() == universidad})
 	}
 	
-	
+	method universidadesFormadoras() {
+		return profesionales.all({profe => profe.universidad()})
+	}
 	
 }
